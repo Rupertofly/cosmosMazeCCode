@@ -1,5 +1,5 @@
-#include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
+#include <Arduino.h>
 
 const uint8_t gamma8[] = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
@@ -21,13 +21,18 @@ const uint8_t gamma8[] = {
     215, 218, 220, 223, 225, 228, 231, 233, 236, 239, 241, 244, 247, 249, 252,
     255};
 
-const uint8_t CELL_ADR[11][6][2] = {
-    {{2, 3}, {4, 5}, {6, 7}},       {{8, 9}, {10, 11}, {12, 13}},
-    {{14, 15}, {16, 17}, {18, 19}}, {{20, 21}, {22, 23}, {24, 25}},
-    {{26, 27}, {28, 29}, {30, 31}}, {{32, 33}, {34, 35}, {36, 37}},
-    {{38, 39}, {40, 41}, {42, 43}}, {{44, 45}, {46, 47}, {48, 49}},
-    {{50, 51}, {52, 53}, {54, 55}}, {{56, 57}, {58, 59}, {60, 61}},
-    {{1, 0}, {63, 63}, {99, 99}}};
+const uint8_t CELL_ADR[11][6] = {
+    {2, 3, 4, 5, 6, 7},       {8, 9, 10, 11, 12, 13},
+    {14, 15, 16, 17, 18, 19}, {20, 21, 22, 23, 24, 25},
+    {26, 27, 28, 29, 30, 31}, {32, 33, 34, 35, 36, 37},
+    {38, 39, 40, 41, 42, 43}, {44, 45, 46, 47, 48, 49},
+    {50, 51, 52, 53, 54, 55}, {56, 57, 58, 59, 60, 61},
+    {1, 0, 63, 99, 99, 99}};
+
+const uint8_t neighbours[11][6][4] =
+    {
+
+};
 
 class MazeLED {
 public:
@@ -40,22 +45,23 @@ public:
 class MazeCell {
 public:
   MazeCell(MazeLED *_LEDArr[], byte _rAdr, byte _dAdr);
-  MazeLED *path;
-  MazeLED *wall;
+  MazeLED *led;
   byte rAdr;
   byte dAdr;
-  byte *neighbours[4][2];
+  byte neighbours[4];
   void update();
 };
 class MazeCtrl {
 public:
   MazeCtrl(Adafruit_NeoPixel *_strip);
   Adafruit_NeoPixel *strip;
-  MazeCell *cells[32];
+  MazeCell *cells[63];
   MazeLED *leds[63];
   void updateIn(byte in[]);
   void updateIn(byte adr, byte val);
   void update();
+  void calculateNeighbours();
+  void calculatePath();
 
 private:
   MazeCell *getCell(byte _rAdr, byte _dAdr);
