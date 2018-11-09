@@ -7,11 +7,15 @@
                 "${workspaceFolder}/**",
                 "/Users/rupertmoore/Documents/Arduino/libraries/Adafruit_NeoPixel",
                 "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/cores/arduino/**",
+                "/Users/rupertmoore/Documents/Arduino/libraries/ArduinoQueue",
+                "/Users/rupertmoore/Documents/Arduino/libraries/ArduinoQueue/Queue",
                 "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include",
                 "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/lib/gcc/avr/5.4.0/include",
                 "/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/variants/leonardo"
             ],
-            "defines": ["USBCON"],
+            "defines": [
+                "USBCON"
+            ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
